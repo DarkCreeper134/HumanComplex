@@ -2,17 +2,17 @@ extends KinematicBody2D
 
 export var ACCELERATION = 500
 export var MAX_SPEED = 80
-export var ROLL_SPEED = 120
+#export var ROLL_SPEED = 120
 export var FRICTION = 500
 var input_vector = Vector2.ZERO
 
 enum {
 	MOVE,
-	SLEEP,
-	ACTION
+	#SLEEP,
+	#ACTION
 }
 
-signal BedLeave
+#signal BedLeave
 
 var state = MOVE
 
@@ -30,10 +30,10 @@ func _physics_process(delta):
 	match state:
 		MOVE:
 			Move_State(delta)
-		SLEEP:
-			Sleep_State()
-		ACTION:
-			Action_State()
+		#SLEEP:
+			#Sleep_State()
+		#ACTION:
+			#Action_State()
 
 func Move_State(delta):
 	input_vector = Vector2.ZERO
@@ -52,29 +52,29 @@ func Move_State(delta):
 	
 	move()
 	
-	if Input.is_action_just_pressed("ui_accept"):
-		state = ACTION
+	#if Input.is_action_just_pressed("ui_accept"):
+		#state = ACTION
 
 
 func move():
 	velocity = move_and_slide(velocity)
 
-func BedActivated():
-	state = SLEEP
+#func BedActivated():
+	#state = SLEEP
 
-func Sleep_State():
-	animationTree.set("parameters/Idle/blend_position", Vector2.DOWN)
-	animationState.travel("Idle")
-	if Input.is_action_just_pressed("ui_accept"):
-		state = MOVE
-		emit_signal("BedLeave")
+#func Sleep_State():
+	#animationTree.set("parameters/Idle/blend_position", Vector2.DOWN)
+	#animationState.travel("Idle")
+	#if Input.is_action_just_pressed("ui_accept"):
+		#state = MOVE
+		#emit_signal("BedLeave")
 
-func Action_State():
-	animationState.travel("Idle")
-	velocity = Vector2.ZERO
-	actionHitbox.disabled = false
-	state = MOVE
+#func Action_State():
+	#animationState.travel("Idle")
+	#velocity = Vector2.ZERO
+	#actionHitbox.disabled = false
+	#state = MOVE
 
-func DoorEntered():
-	animationTree.set("parameters/Idle/blend_position", input_vector)
-	animationTree.set("parameters/Run/blend_position", input_vector)
+#func DoorEntered():
+	#animationTree.set("parameters/Idle/blend_position", input_vector)
+	#animationTree.set("parameters/Run/blend_position", input_vector)
