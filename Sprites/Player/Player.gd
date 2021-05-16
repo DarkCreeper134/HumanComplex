@@ -26,7 +26,7 @@ onready var actionHitbox = $HitboxPivot/Action/CollisionShape2D
 
 
 func _physics_process(delta):
-	actionHitbox.disabled = true
+	#actionHitbox.disabled = true
 	match state:
 		MOVE:
 			Move_State(delta)
