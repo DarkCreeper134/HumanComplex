@@ -1393,19 +1393,5 @@ remote_path = NodePath("../../../Camera2D")
 [node name="StaticBody2D" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 80, 24 )
 
-[node name="Enemys" type="YSort" parent="YSort"]
-
-[node name="SlimeEnemy" parent="YSort/Enemys" instance=ExtResource( 8 )]
-position = Vector2( -96, 256 )
-
-[node name="SlimeEnemy2" parent="YSort/Enemys" instance=ExtResource( 8 )]
-position = Vector2( 248, 312 )
-
-[node name="SlimeEnemy3" parent="YSort/Enemys" instance=ExtResource( 8 )]
-position = Vector2( 224, 192 )
-
-[node name="SlimeEnemy4" parent="YSort/Enemys" instance=ExtResource( 8 )]
-position = Vector2( 72, 248 )
-
-[node name="SlimeEnemy5" parent="YSort/Enemys" instance=ExtResource( 8 )]
-position = Vector2( -48, 344 )
+[node name="SlimeEnemy" parent="YSort" instance=ExtResource( 8 )]
+position = Vector2( 80, 104 )
