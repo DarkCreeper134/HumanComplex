@@ -36,6 +36,8 @@ func _physics_process(delta):
 		WANDER:
 			seek_player()
 			check_state()
+			if self.global_position == wanderController.target_position :
+				wanderController.timer = 0
 			
 			var direction = global_position.direction_to(wanderController.target_position)
 			velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
