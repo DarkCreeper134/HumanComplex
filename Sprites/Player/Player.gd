@@ -9,7 +9,7 @@ var input_vector = Vector2.ZERO
 enum {
 	MOVE,
 	#SLEEP,
-	#ACTION
+	ACTION
 }
 
 #signal BedLeave
@@ -21,19 +21,16 @@ var velocity = Vector2.ZERO
 onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
-onready var actionHitbox = $HitboxPivot/Action/CollisionShape2D
-
-
+onready var attackShape = $HitboxPivot/Attack/CollisionShape2D
 
 func _physics_process(delta):
-	#actionHitbox.disabled = true
 	match state:
 		MOVE:
 			Move_State(delta)
 		#SLEEP:
 			#Sleep_State()
-		#ACTION:
-			#Action_State()
+		ACTION:
+			Action_State()
 
 func Move_State(delta):
 	input_vector = Vector2.ZERO
@@ -44,6 +41,7 @@ func Move_State(delta):
 	if input_vector != Vector2.ZERO:
 		animationTree.set("parameters/Idle/blend_position", input_vector)
 		animationTree.set("parameters/Run/blend_position", input_vector)
+		animationTree.set("parameters/Attack/blend_position", input_vector)
 		animationState.travel("Run")
 		velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta)
 	else:
@@ -52,8 +50,8 @@ func Move_State(delta):
 	
 	move()
 	
-	#if Input.is_action_just_pressed("ui_accept"):
-		#state = ACTION
+	if Input.is_action_just_pressed("ui_accept"):
+		state = ACTION
 
 
 func move():
@@ -69,11 +67,16 @@ func move():
 		#state = MOVE
 		#emit_signal("BedLeave")
 
-#func Action_State():
-	#animationState.travel("Idle")
-	#velocity = Vector2.ZERO
-	#actionHitbox.disabled = false
-	#state = MOVE
+func Action_State():
+	animationState.travel("Attack")
+	attackShape.disabled = false
+	velocity = Vector2.ZERO
+
+
+func Attack_Finished():
+	animationState.travel("Idle")
+	attackShape.disabled = true
+	state = MOVE
 
 #func DoorEntered():
 	#animationTree.set("parameters/Idle/blend_position", input_vector)

@@ -74,4 +74,3 @@ func _on_Stats_no_health():
 func _on_HurtBox_area_entered(area):
 	stats.health -= area.damage
 	knockback = area.knockback_vector * 120
-	hurtbox.create_hit_effect()
