@@ -33,6 +33,7 @@ func _physics_process(delta):
 			Action_State()
 
 func Move_State(delta):
+	attackShape.disabled = true
 	input_vector = Vector2.ZERO
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")

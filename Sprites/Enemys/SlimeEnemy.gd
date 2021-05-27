@@ -18,10 +18,12 @@ var state = CHASE
 
 onready var stats = $Stats
 onready var playerDetectionZone = $PlayerDetectionZone
-onready var sprite = $AnimatedSprite
 onready var hurtbox = $Hurtbox
 onready var softCollision = $SoftCollision
 onready var wanderController = $WanderController
+onready var animationPlayer = $AnimationPlayer
+
+var canMove = false
 
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta)
@@ -49,20 +51,23 @@ func _physics_process(delta):
 				velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
 			else:
 				state = IDLE
-			sprite.flip_h = velocity.x < 0
 	
 	if softCollision.is_colliding():
 		velocity += softCollision.get_push_vector() * delta * 400
-	velocity = move_and_slide(velocity)
+	move()
+
+func move():
+	if canMove != false:
+		move_and_slide(velocity)
 
 func seek_player():
 	if playerDetectionZone.can_see_player():
 		state = CHASE
-		
+
 func check_state():
 	if wanderController.get_time_left() == 0:
-				state = pick_random_state([IDLE, WANDER])
-				wanderController.start_wander_timer(rand_range(1,3))
+		state = pick_random_state([IDLE, WANDER])
+		wanderController.start_wander_timer(rand_range(1,3))
 
 func pick_random_state(state_list):
 	state_list.shuffle()
@@ -74,3 +79,9 @@ func _on_Stats_no_health():
 func _on_HurtBox_area_entered(area):
 	stats.health -= area.damage
 	knockback = area.knockback_vector * 120
+
+func MoveUpdate():
+	if canMove:
+		canMove = false
+	else:
+		canMove = true
