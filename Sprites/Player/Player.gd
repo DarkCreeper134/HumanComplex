@@ -71,6 +71,7 @@ func move():
 func Action_State():
 	animationState.travel("Attack")
 	attackShape.disabled = false
+	move()
 	velocity = Vector2.ZERO
 
 

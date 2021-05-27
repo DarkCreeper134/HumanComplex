@@ -12,6 +12,7 @@ enum {
 
 var velocity = Vector2.ZERO
 var knockback = Vector2.ZERO
+var setVelocity = Vector2.ZERO
 
 
 var state = CHASE
@@ -58,7 +59,7 @@ func _physics_process(delta):
 
 func move():
 	if canMove != false:
-		move_and_slide(velocity)
+		move_and_slide(setVelocity)
 
 func seek_player():
 	if playerDetectionZone.can_see_player():
@@ -85,3 +86,6 @@ func MoveUpdate():
 		canMove = false
 	else:
 		canMove = true
+
+func SetVelocity():
+	setVelocity = velocity
