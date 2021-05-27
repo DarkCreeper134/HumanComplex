@@ -21,7 +21,7 @@ var velocity = Vector2.ZERO
 onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
-onready var attackShape = $HitboxPivot/Attack/CollisionShape2D
+onready var attackShape = $YSort/HitboxPivot/Attack/CollisionShape2D
 
 func _physics_process(delta):
 	match state:
