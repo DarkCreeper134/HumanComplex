@@ -15,13 +15,14 @@ enum {
 #signal BedLeave
 
 var state = MOVE
-
 var velocity = Vector2.ZERO
+var stats = PlayerStats
 
 onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 onready var attackShape = $YSort/HitboxPivot/Attack/CollisionShape2D
+onready var hurtbox = $HurtBox
 
 func _physics_process(delta):
 	match state:
@@ -83,3 +84,7 @@ func Attack_Finished():
 #func DoorEntered():
 	#animationTree.set("parameters/Idle/blend_position", input_vector)
 	#animationTree.set("parameters/Run/blend_position", input_vector)
+
+func _on_HurtBox_area_entered(area):
+	stats.health -= area.DAMAGE
+	hurtbox.start_invincibility(0.5)

@@ -24,6 +24,5 @@ func _on_Timer_timeout():
 func _on_HurtBox_invicniblity_ended():
 	monitorable = true
 
-
 func _on_HurtBox_invicniblity_started():
 	set_deferred("monitorable",false)

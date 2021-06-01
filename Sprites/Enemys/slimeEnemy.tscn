@@ -6,8 +6,8 @@
 [ext_resource path="res://Hitboxes-Hurtboxes/SoftCollision.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Hitboxes-Hurtboxes/HurtBox.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Hitboxes-Hurtboxes/Hitbox.tscn" type="PackedScene" id=6]
-[ext_resource path="res://WanderController.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Stats.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Hitboxes-Hurtboxes/WanderController.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Hitboxes-Hurtboxes/Stats.tscn" type="PackedScene" id=8]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 1.99998

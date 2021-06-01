@@ -3,10 +3,10 @@
 [ext_resource path="res://Sprites/Enemys/SlimeEnemy.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Enemys/slimeEnemy.png" type="Texture" id=2]
 [ext_resource path="res://Hitboxes-Hurtboxes/SoftCollision.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Stats.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Hitboxes-Hurtboxes/Stats.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Hitboxes-Hurtboxes/HurtBox.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Hitboxes-Hurtboxes/PlayerDetectionZone.tscn" type="PackedScene" id=6]
-[ext_resource path="res://WanderController.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Hitboxes-Hurtboxes/WanderController.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Hitboxes-Hurtboxes/Hitbox.tscn" type="PackedScene" id=8]
 
 [sub_resource type="CapsuleShape2D" id=1]
@@ -118,7 +118,6 @@ max_health = 2
 [node name="Sprite" type="Sprite" parent="SlimeEnemy"]
 texture = ExtResource( 2 )
 hframes = 8
-frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SlimeEnemy"]
 anims/Default = SubResource( 6 )

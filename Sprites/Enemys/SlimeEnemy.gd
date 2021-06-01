@@ -19,7 +19,7 @@ var state = CHASE
 
 onready var stats = $Stats
 onready var playerDetectionZone = $PlayerDetectionZone
-onready var hurtbox = $Hurtbox
+onready var hurtbox = $HurtBox
 onready var softCollision = $SoftCollision
 onready var wanderController = $WanderController
 onready var animationPlayer = $AnimationPlayer
@@ -81,6 +81,7 @@ func _on_Stats_no_health():
 func _on_HurtBox_area_entered(area):
 	stats.health -= area.damage
 	knockback = area.knockback_vector * 120
+	hurtbox.start_invincibility(0.5)
 
 func MoveUpdate():
 	if canMove:
