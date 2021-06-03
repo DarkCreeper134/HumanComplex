@@ -23,6 +23,7 @@ onready var hurtbox = $HurtBox
 onready var softCollision = $SoftCollision
 onready var wanderController = $WanderController
 onready var animationPlayer = $AnimationPlayer
+onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 
 var canMove = false
 
@@ -76,12 +77,14 @@ func pick_random_state(state_list):
 	return state_list.pop_front()
 
 func _on_Stats_no_health():
+	hurtbox.create_hit_effect()
 	queue_free()
 
 func _on_HurtBox_area_entered(area):
 	stats.health -= area.damage
-	knockback = area.knockback_vector * 120
+	knockback = area.knockback * 120
 	hurtbox.start_invincibility(0.5)
+	hurtbox.create_hit_effect()
 
 func MoveUpdate():
 	if canMove:
@@ -91,3 +94,11 @@ func MoveUpdate():
 
 func SetVelocity():
 	setVelocity = velocity
+
+
+func _on_HurtBox_invicniblity_ended():
+	blinkAnimationPlayer.play("End")
+
+
+func _on_HurtBox_invicniblity_started():
+	blinkAnimationPlayer.play("Start")

@@ -23,6 +23,12 @@ onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 onready var attackShape = $YSort/HitboxPivot/Attack/CollisionShape2D
 onready var hurtbox = $HurtBox
+onready var blinkAnimationPlayer = $BlinkAnimationPlayer
+onready var swordHitbox = $YSort/HitboxPivot/Attack
+
+func _ready():
+	stats.connect("no_health", self, "queue_free")
+	animationTree.active = true
 
 func _physics_process(delta):
 	match state:
@@ -45,6 +51,7 @@ func Move_State(delta):
 		animationTree.set("parameters/Run/blend_position", input_vector)
 		animationTree.set("parameters/Attack/blend_position", input_vector)
 		animationState.travel("Run")
+		swordHitbox.knockback = input_vector
 		velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta)
 	else:
 		animationState.travel("Idle")
@@ -86,5 +93,11 @@ func Attack_Finished():
 	#animationTree.set("parameters/Run/blend_position", input_vector)
 
 func _on_HurtBox_area_entered(area):
-	stats.health -= area.DAMAGE
+	stats.health -= 1
 	hurtbox.start_invincibility(0.5)
+
+func _on_HurtBox_invicniblity_started():
+	blinkAnimationPlayer.play("Start")
+
+func _on_HurtBox_invicniblity_ended():
+	blinkAnimationPlayer.play("End")
