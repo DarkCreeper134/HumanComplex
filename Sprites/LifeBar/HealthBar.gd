@@ -8,11 +8,13 @@ onready var heartUIEmpty = $Empty
 onready var floatHealth = float(hearts)
 onready var floatMaxHealth = float(max_hearts)
 onready var healthPercent = floatHealth / floatMaxHealth
+onready var label = $Label
 
 func set_hearts(value):
 	hearts = clamp(value, 0, max_hearts)
 	floatHealth = float(hearts)
 	healthPercent = floatHealth/floatMaxHealth
+	label.text = "Life = " + String(hearts) + "/" + String(max_hearts)
 	if heartUIFull != null:
 		heartUIFull.rect_size.x = healthPercent * 160
 
