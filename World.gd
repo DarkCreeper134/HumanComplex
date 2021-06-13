@@ -4,9 +4,10 @@ onready var Doors = $YSort/Doors
 onready var Player = $YSort/Player
 onready var Bed = $YSort/Furniture/Bed
 onready var PlayPos = Player.position
+signal playerDeath
 
 func _ready():
-	pass 
+	connect("playerDeath",get_tree().current_scene,"onPlayerDeath")
 
 #func DoorEntered(connection):
 	#var connect = Doors.find_node(connection)
@@ -31,3 +32,9 @@ func _ready():
 
 #func BedLeave():
 	#Player.position = PlayPos
+
+func _on_Player_playerDeath():
+	emit_signal("playerDeath")
+
+func _on_Button_pressed():
+	pass

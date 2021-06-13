@@ -6,6 +6,8 @@ export var MAX_SPEED = 80
 export var FRICTION = 500
 var input_vector = Vector2.ZERO
 
+signal playerDeath
+
 enum {
 	MOVE,
 	#SLEEP,
@@ -27,7 +29,7 @@ onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 onready var swordHitbox = $YSort/HitboxPivot/Attack
 
 func _ready():
-	stats.connect("no_health", self, "queue_free")
+	stats.connect("no_health", self, "no_health")
 	animationTree.active = true
 
 func _physics_process(delta):
@@ -101,3 +103,7 @@ func _on_HurtBox_invicniblity_started():
 
 func _on_HurtBox_invicniblity_ended():
 	blinkAnimationPlayer.play("End")
+
+func no_health():
+	emit_signal("playerDeath")
+	queue_free()
