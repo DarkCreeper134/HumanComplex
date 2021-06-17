@@ -106,4 +106,5 @@ func _on_HurtBox_invicniblity_ended():
 
 func no_health():
 	emit_signal("playerDeath")
+	blinkAnimationPlayer.play("End")
 	queue_free()

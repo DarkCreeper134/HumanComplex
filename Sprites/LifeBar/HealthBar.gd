@@ -14,9 +14,9 @@ func set_hearts(value):
 	hearts = clamp(value, 0, max_hearts)
 	floatHealth = float(hearts)
 	healthPercent = floatHealth/floatMaxHealth
-	label.text = "Life = " + String(hearts) + "/" + String(max_hearts)
+	label.text = String(hearts) + "/" + String(max_hearts)
 	if heartUIFull != null:
-		heartUIFull.rect_size.x = healthPercent * 160
+		heartUIFull.rect_size.x = healthPercent * 80
 
 func set_max_hearts(value):
 	max_hearts = max(value, 1)
@@ -24,7 +24,7 @@ func set_max_hearts(value):
 	floatHealth = float(hearts)
 	floatMaxHealth = float(max_hearts)
 	if heartUIFull != null:
-		heartUIFull.rect_size.x = healthPercent * 160
+		heartUIFull.rect_size.x = healthPercent * 80
 
 func _ready():
 	self.max_hearts = PlayerStats.max_health

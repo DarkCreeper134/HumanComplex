@@ -3,7 +3,7 @@ onready var DeathPopup = $CanvasLayer/DeathPopup
 onready var playerStats = $"/root/PlayerStats"
 
 
-var world = preload("res://World.tscn")
+var world = preload("res://World1.tscn")
 
 func _ready():
 	self.add_child(world.instance())
