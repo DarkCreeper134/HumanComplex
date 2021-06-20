@@ -10,6 +10,8 @@ script = ExtResource( 3 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Control" parent="CanvasLayer" instance=ExtResource( 1 )]
+margin_right = 32.0
+margin_bottom = 32.0
 
 [node name="DeathPopup" parent="CanvasLayer" instance=ExtResource( 2 )]
 

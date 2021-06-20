@@ -10,10 +10,18 @@ enum {
 	CHASE
 }
 
+var colors = [
+	{r = 255,b = 0, g = 0, a = 255},
+	{r = 255,b = 255, g = 0, a = 255},
+	{r = 255,b = 0, g = 255, a = 255},
+	{r = 0,b = 255, g = 0, a = 255},
+	{r = 0,b = 255, g = 255, a = 255},
+	{r = 0,b = 0, g = 255, a = 255}
+]
+
 var velocity = Vector2.ZERO
 var knockback = Vector2.ZERO
 var setVelocity = Vector2.ZERO
-
 
 var state = CHASE
 
@@ -24,8 +32,16 @@ onready var softCollision = $SoftCollision
 onready var wanderController = $WanderController
 onready var animationPlayer = $AnimationPlayer
 onready var blinkAnimationPlayer = $BlinkAnimationPlayer
+onready var sprite = $Sprite
 
 var canMove = false
+
+func _ready():
+	var color = colors[rand_range(0, colors.size())]
+	sprite.modulate.a8 = color.a
+	sprite.modulate.b8 = color.b
+	sprite.modulate.g8 = color.g
+	sprite.modulate.r8 = color.r
 
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta)
