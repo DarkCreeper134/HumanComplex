@@ -5,9 +5,11 @@ onready var Player = $YSort/Player
 onready var Bed = $YSort/Furniture/Bed
 onready var PlayPos = Player.position
 signal playerDeath
-
+signal nextLevel
 func _ready():
+	
 	connect("playerDeath",get_tree().current_scene,"onPlayerDeath")
+	connect("nextLevel",get_tree().current_scene,"loadLevel")
 
 #func DoorEntered(connection):
 	#var connect = Doors.find_node(connection)
@@ -38,3 +40,10 @@ func _on_Player_playerDeath():
 
 func _on_Button_pressed():
 	pass
+
+func _on_Transition_TrasitionActivated(Key, IsDoor):
+	if IsDoor:
+		pass
+	else:
+		emit_signal("nextLevel",Key)
+	
