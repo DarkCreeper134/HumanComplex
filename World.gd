@@ -1,8 +1,6 @@
 extends Node2D
 
-onready var Doors = $YSort/Doors
 onready var Player = $YSort/Player
-onready var Bed = $YSort/Furniture/Bed
 onready var PlayPos = Player.position
 signal playerDeath
 signal nextLevel
@@ -41,9 +39,9 @@ func _on_Player_playerDeath():
 func _on_Button_pressed():
 	pass
 
-func _on_Transition_TrasitionActivated(Key, IsDoor):
+func _on_Transition_TrasitionActivated(Key, Link, IsDoor):
 	if IsDoor:
 		pass
 	else:
-		emit_signal("nextLevel",Key)
+		emit_signal("nextLevel",Key, Link)
 	
