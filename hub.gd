@@ -5,7 +5,7 @@ onready var playerStats = $"/root/PlayerStats"
 var StartWorld = preload("res://World1.tscn")
 
 var levels ={
-AO = preload("res://World1.tscn"),
+A0 = preload("res://World1.tscn"),
 A1 = preload("res://World2.tscn")
 }
 

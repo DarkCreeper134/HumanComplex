@@ -4,8 +4,8 @@ onready var Player = $YSort/Player
 onready var PlayPos = Player.position
 signal playerDeath
 signal nextLevel
+
 func _ready():
-	
 	connect("playerDeath",get_tree().current_scene,"onPlayerDeath")
 	connect("nextLevel",get_tree().current_scene,"loadLevel")
 

@@ -1424,7 +1424,7 @@ position = Vector2( 112, 368 )
 
 [node name="Sprite" parent="YSort/Enemies/Slime7/SlimeEnemy" index="8"]
 material = SubResource( 140 )
-frame = 2
+frame = 7
 
 [node name="AnimationTree" parent="YSort/Enemies/Slime7/SlimeEnemy" index="10"]
 parameters/playback = SubResource( 141 )
