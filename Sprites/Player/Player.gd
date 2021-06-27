@@ -90,9 +90,9 @@ func Attack_Finished():
 	attackShape.disabled = true
 	state = MOVE
 
-#func DoorEntered():
-	#animationTree.set("parameters/Idle/blend_position", input_vector)
-	#animationTree.set("parameters/Run/blend_position", input_vector)
+func DoorEntered():
+	animationTree.set("parameters/Idle/blend_position", input_vector)
+	animationTree.set("parameters/Run/blend_position", input_vector)
 
 func _on_HurtBox_area_entered(area):
 	stats.health -= 1

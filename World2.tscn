@@ -174,14 +174,6 @@ tile_data = PoolIntArray( 1048568, 0, 0, 1048569, 0, 2, 983046, 0, 0, 983047, 0,
 position = Vector2( 0, 16 )
 current = true
 
-[node name="Transition" parent="." instance=ExtResource( 6 )]
-position = Vector2( 0, 376 )
-IsDoor = false
-
-[node name="CollisionShape2D" parent="Transition/Area2D" index="0"]
-position = Vector2( -0.618896, -200.464 )
-shape = SubResource( 6 )
-
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Player" parent="YSort" instance=ExtResource( 7 )]
@@ -190,6 +182,17 @@ position = Vector2( 0, 16 )
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/Player"]
 remote_path = NodePath("../../../Camera2D")
 
-[connection signal="TrasitionActivated" from="Transition" to="." method="_on_Transition_TrasitionActivated"]
+[node name="Doors" type="Node2D" parent="."]
 
-[editable path="Transition"]
+[node name="A0" parent="Doors" instance=ExtResource( 6 )]
+position = Vector2( 0, 376 )
+IsDoor = false
+
+[node name="CollisionShape2D" parent="Doors/A0/Area2D" index="0"]
+shape = SubResource( 6 )
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="TrasitionActivated" from="Doors/A0" to="." method="_on_Transition_TrasitionActivated"]
+
+[editable path="Doors/A0"]

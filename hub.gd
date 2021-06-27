@@ -28,4 +28,7 @@ func loadLevel(Key, link):
 	var childNumber = self.get_child_count()
 	self.get_child(childNumber - 1).queue_free()
 	self.add_child(level.instance())
+	self.get_child(childNumber - 1).DoorEntered(link)
+
+func LevelReady():
 	pass

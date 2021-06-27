@@ -1360,7 +1360,7 @@ shader_param/active = false
 [sub_resource type="AnimationNodeStateMachinePlayback" id=141]
 
 [sub_resource type="RectangleShape2D" id=142]
-extents = Vector2( 16, 10 )
+extents = Vector2( 16, 8 )
 
 [node name="World" type="Node2D"]
 script = ExtResource( 9 )
@@ -1424,7 +1424,7 @@ position = Vector2( 112, 368 )
 
 [node name="Sprite" parent="YSort/Enemies/Slime7/SlimeEnemy" index="8"]
 material = SubResource( 140 )
-frame = 7
+frame = 0
 
 [node name="AnimationTree" parent="YSort/Enemies/Slime7/SlimeEnemy" index="10"]
 parameters/playback = SubResource( 141 )
@@ -1435,24 +1435,28 @@ position = Vector2( 80, 48 )
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/Player"]
 remote_path = NodePath("../../../Camera2D")
 
-[node name="Transition" parent="YSort" instance=ExtResource( 10 )]
+[node name="Doors" type="Node2D" parent="."]
+
+[node name="A0" parent="Doors" instance=ExtResource( 10 )]
 position = Vector2( -48, 464 )
 Key = "A1"
 IsDoor = false
 
-[node name="Area2D" parent="YSort/Transition" index="0"]
+[node name="Area2D" parent="Doors/A0" index="0"]
 scale = Vector2( 0.990669, 1 )
 
-[node name="CollisionShape2D" parent="YSort/Transition/Area2D" index="0"]
+[node name="CollisionShape2D" parent="Doors/A0/Area2D" index="0"]
 position = Vector2( 0, -8 )
 shape = SubResource( 142 )
 
+[node name="Timer" type="Timer" parent="."]
+
 [connection signal="playerDeath" from="YSort/Player" to="." method="_on_Player_playerDeath"]
-[connection signal="TrasitionActivated" from="YSort/Transition" to="." method="_on_Transition_TrasitionActivated"]
+[connection signal="TrasitionActivated" from="Doors/A0" to="." method="_on_Transition_TrasitionActivated"]
 
 [editable path="YSort/Enemies/Slime7"]
 [editable path="YSort/Enemies/Slime7/SlimeEnemy/HurtBox"]
 [editable path="YSort/Enemies/Slime7/SlimeEnemy/Hitbox"]
 [editable path="YSort/Enemies/Slime7/SlimeEnemy/PlayerDetectionZone"]
 [editable path="YSort/Enemies/Slime7/SlimeEnemy/SoftCollision"]
-[editable path="YSort/Transition"]
+[editable path="Doors/A0"]
