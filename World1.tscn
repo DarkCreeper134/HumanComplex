@@ -1450,9 +1450,11 @@ position = Vector2( 0, -8 )
 shape = SubResource( 142 )
 
 [node name="Timer" type="Timer" parent="."]
+autostart = true
 
 [connection signal="playerDeath" from="YSort/Player" to="." method="_on_Player_playerDeath"]
 [connection signal="TrasitionActivated" from="Doors/A0" to="." method="_on_Transition_TrasitionActivated"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 
 [editable path="YSort/Enemies/Slime7"]
 [editable path="YSort/Enemies/Slime7/SlimeEnemy/HurtBox"]

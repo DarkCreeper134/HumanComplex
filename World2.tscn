@@ -192,7 +192,9 @@ IsDoor = false
 shape = SubResource( 6 )
 
 [node name="Timer" type="Timer" parent="."]
+autostart = true
 
 [connection signal="TrasitionActivated" from="Doors/A0" to="." method="_on_Transition_TrasitionActivated"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 
 [editable path="Doors/A0"]

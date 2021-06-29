@@ -25,10 +25,10 @@ func onPlayerDeath():
 
 func loadLevel(Key, link):
 	var level = levels.get(Key)
-	var childNumber = self.get_child_count()
-	self.get_child(childNumber - 1).queue_free()
+	var childNumber = self.get_child_count() - 1
+	self.get_child(childNumber).queue_free()
 	self.add_child(level.instance())
-	self.get_child(childNumber - 1).DoorEntered(link)
+	self.get_child(childNumber).DoorEntered(link)
 
 func LevelReady():
 	pass
