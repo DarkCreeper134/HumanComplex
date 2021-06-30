@@ -1,17 +1,18 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://Textures/GravelPath.png" type="Texture" id=1]
-[ext_resource path="res://Textures/GravelWorn.png" type="Texture" id=2]
-[ext_resource path="res://Textures/Grass.png" type="Texture" id=3]
-[ext_resource path="res://Textures/Dirt.png" type="Texture" id=4]
-[ext_resource path="res://Textures/CliffEdge.png" type="Texture" id=5]
-[ext_resource path="res://Effects/Transition.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Sprites/Player/Player.tscn" type="PackedScene" id=7]
-[ext_resource path="res://World.gd" type="Script" id=8]
+[ext_resource path="res://Textures/Grass.png" type="Texture" id=1]
+[ext_resource path="res://Textures/Dirt.png" type="Texture" id=2]
+[ext_resource path="res://Textures/CliffEdge.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Player/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Effects/Transition.tscn" type="PackedScene" id=5]
+[ext_resource path="res://World/World.gd" type="Script" id=6]
+[ext_resource path="res://Textures/GravelPath.png" type="Texture" id=7]
+[ext_resource path="res://Textures/GravelWorn.png" type="Texture" id=8]
+[ext_resource path="res://World/TranstionTo.tscn" type="PackedScene" id=9]
 
 [sub_resource type="TileSet" id=1]
 0/name = "Grass.png 0"
-0/texture = ExtResource( 3 )
+0/texture = ExtResource( 1 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 64, 64 )
@@ -36,7 +37,7 @@
 
 [sub_resource type="TileSet" id=2]
 0/name = "Dirt.png 0"
-0/texture = ExtResource( 4 )
+0/texture = ExtResource( 2 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 176, 80 )
@@ -61,7 +62,7 @@
 
 [sub_resource type="TileSet" id=3]
 0/name = "GravelPath.png 0"
-0/texture = ExtResource( 1 )
+0/texture = ExtResource( 7 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 272, 80 )
@@ -86,7 +87,7 @@
 
 [sub_resource type="TileSet" id=4]
 0/name = "GravelWorn.png 0"
-0/texture = ExtResource( 2 )
+0/texture = ExtResource( 8 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 64, 64 )
@@ -111,7 +112,7 @@
 
 [sub_resource type="TileSet" id=5]
 0/name = "CliffEdge.png 0"
-0/texture = ExtResource( 5 )
+0/texture = ExtResource( 3 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 176, 80 )
@@ -138,7 +139,7 @@
 extents = Vector2( 16, 8 )
 
 [node name="World2" type="Node2D"]
-script = ExtResource( 8 )
+script = ExtResource( 6 )
 
 [node name="Grass" type="TileMap" parent="."]
 tile_set = SubResource( 1 )
@@ -173,28 +174,35 @@ tile_data = PoolIntArray( 1048568, 0, 0, 1048569, 0, 2, 983046, 0, 0, 983047, 0,
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 0, 16 )
 current = true
+smoothing_enabled = true
 
 [node name="YSort" type="YSort" parent="."]
 
-[node name="Player" parent="YSort" instance=ExtResource( 7 )]
+[node name="Player" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 0, 16 )
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/Player"]
 remote_path = NodePath("../../../Camera2D")
 
-[node name="Doors" type="Node2D" parent="."]
+[node name="TranstionTo" type="Node2D" parent="."]
 
-[node name="A0" parent="Doors" instance=ExtResource( 6 )]
+[node name="ToLevel1" parent="TranstionTo" instance=ExtResource( 5 )]
 position = Vector2( 0, 376 )
+Link = "A1"
 IsDoor = false
 
-[node name="CollisionShape2D" parent="Doors/A0/Area2D" index="0"]
+[node name="CollisionShape2D" parent="TranstionTo/ToLevel1/Area2D" index="0"]
 shape = SubResource( 6 )
 
-[node name="Timer" type="Timer" parent="."]
-autostart = true
+[node name="TransitionFrom" type="Node2D" parent="."]
 
-[connection signal="TrasitionActivated" from="Doors/A0" to="." method="_on_Transition_TrasitionActivated"]
+[node name="A0" parent="TransitionFrom" instance=ExtResource( 9 )]
+position = Vector2( 0, 352 )
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="TrasitionActivated" from="TranstionTo/ToLevel1" to="." method="_on_Transition_TrasitionActivated"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 
-[editable path="Doors/A0"]
+[editable path="TranstionTo/ToLevel1"]

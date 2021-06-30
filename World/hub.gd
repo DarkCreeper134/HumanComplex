@@ -1,12 +1,13 @@
 extends Node2D
 onready var DeathPopup = $CanvasLayer/DeathPopup
 onready var playerStats = $"/root/PlayerStats"
+onready var Keys = $"/root/Keys"
 
-var StartWorld = preload("res://World1.tscn")
+var StartWorld = preload("res://World/World1.tscn")
 
-var levels ={
-A0 = preload("res://World1.tscn"),
-A1 = preload("res://World2.tscn")
+var levels = {
+A0 = preload("res://World/World1.tscn"),
+A1 = preload("res://World/World2.tscn")
 }
 
 func _ready():
@@ -25,10 +26,10 @@ func onPlayerDeath():
 
 func loadLevel(Key, link):
 	var level = levels.get(Key)
+	Keys.currentKey = link
 	var childNumber = self.get_child_count() - 1
 	self.get_child(childNumber).queue_free()
 	self.add_child(level.instance())
-	self.get_child(childNumber).DoorEntered(link)
 
 func LevelReady():
 	pass

@@ -2,8 +2,9 @@ extends Node2D
 
 onready var Player = $YSort/Player
 onready var PlayPos = Player.position
-onready var Doors = $Doors
+onready var TransitionFrom = $TransitionFrom
 onready var timer = $Timer
+onready var Keys = $"/root/Keys"
 signal playerDeath
 signal nextLevel
 signal LevelReady
@@ -13,13 +14,7 @@ var enteredDoor = false
 func _ready():
 	connect("playerDeath",get_tree().current_scene,"onPlayerDeath")
 	connect("nextLevel",get_tree().current_scene,"loadLevel")
-	connect("LevelReady",get_tree().current_scene,"LevelReady")
-	emit_signal("LevelReady")
-	
-
-func DoorEntered(connection):
-	CurrentDoorKey = connection
-	timer.start(1)
+	timer.start(0.0001)
 
 #func BedActivated():
 	#PlayPos = Player.position
@@ -43,12 +38,13 @@ func _on_Transition_TrasitionActivated(Key, Link, IsDoor):
 		emit_signal("nextLevel",Key, Link)
 
 func _on_Timer_timeout():
-	var connection = CurrentDoorKey
-	var door = Doors.find_node(connection)
+	timer.stop()
+	var connection = Keys.currentKey
+	var door = TransitionFrom.find_node(connection)
 	if door != null:
 		var location = Vector2.ZERO
 		var direction = Vector2.ZERO
-		match door.ExitFrom:
+		match door.Direction:
 			"TOP":
 				direction = Vector2.UP
 			"BOTTOM":
@@ -60,8 +56,8 @@ func _on_Timer_timeout():
 		location.x = door.position.x
 		location.y = door.position.y
 		var position = Vector2.ZERO
-		position.x = location.x + (direction.x * 30)
-		position.y = location.y + (direction.y * 30)
+		position.x = location.x
+		position.y = location.y
 		Player.position = position
 		Player.input_vector = direction
 		Player.velocity = Vector2.ZERO

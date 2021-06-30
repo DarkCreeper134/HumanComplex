@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Sprites/LifeBar/HealthBar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Effects/DeathPopup.tscn" type="PackedScene" id=2]
-[ext_resource path="res://hub.gd" type="Script" id=3]
+[ext_resource path="res://World/hub.gd" type="Script" id=3]
 
 [node name="Hub" type="Node2D"]
 script = ExtResource( 3 )
