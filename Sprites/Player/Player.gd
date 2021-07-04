@@ -27,6 +27,7 @@ onready var attackShape = $YSort/HitboxPivot/Attack/CollisionShape2D
 onready var hurtbox = $HurtBox
 onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 onready var swordHitbox = $YSort/HitboxPivot/Attack
+onready var Keys = $"/root/Keys"
 
 func _ready():
 	stats.connect("no_health", self, "no_health")
@@ -66,7 +67,8 @@ func Move_State(delta):
 
 
 func move():
-	velocity = move_and_slide(velocity)
+	if Keys.playerCanMove:
+		velocity = move_and_slide(velocity)
 
 #func BedActivated():
 	#state = SLEEP

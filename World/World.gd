@@ -7,14 +7,17 @@ onready var timer = $Timer
 onready var Keys = $"/root/Keys"
 signal playerDeath
 signal nextLevel
-signal LevelReady
+signal stopTransition
+signal startTransition
 var CurrentDoorKey = "A0"
 var enteredDoor = false
 
 func _ready():
 	connect("playerDeath",get_tree().current_scene,"onPlayerDeath")
 	connect("nextLevel",get_tree().current_scene,"loadLevel")
-	timer.start(0.0001)
+	connect("stopTransition",get_tree().current_scene,"stopTransition")
+	connect("startTransition",get_tree().current_scene,"startTransition")
+	timer.start(1)
 
 #func BedActivated():
 	#PlayPos = Player.position
@@ -35,6 +38,8 @@ func _on_Transition_TrasitionActivated(Key, Link, IsDoor):
 	if IsDoor:
 		pass
 	else:
+		Keys.playerCanMove = false
+		emit_signal("startTransition")
 		emit_signal("nextLevel",Key, Link)
 
 func _on_Timer_timeout():
@@ -62,3 +67,5 @@ func _on_Timer_timeout():
 		Player.input_vector = direction
 		Player.velocity = Vector2.ZERO
 		Player.DoorEntered()
+		emit_signal("stopTransition")
+		Keys.playerCanMove = true

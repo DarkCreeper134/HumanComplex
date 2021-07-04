@@ -1,5 +1,5 @@
 extends Node2D
 
-export var Direction : String = "TOP"
+export (String, "TOP", "BOTTOM", "LEFT", "RIGHT") var Direction
 
 
