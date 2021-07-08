@@ -97,7 +97,7 @@ func DoorEntered():
 	animationTree.set("parameters/Run/blend_position", input_vector)
 
 func _on_HurtBox_area_entered(area):
-	stats.health -= 1
+	stats.health -= area.damage
 	hurtbox.start_invincibility(0.5)
 
 func _on_HurtBox_invicniblity_started():

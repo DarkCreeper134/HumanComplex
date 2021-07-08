@@ -26,7 +26,6 @@ onready var sprite = $BalloonTop
 onready var animationTree2 = $AnimationTree2
 
 func _ready():
-	sprite.modulate.a8 = rand_range(200, 255)
 	sprite.modulate.b8 = rand_range(0, 255)
 	sprite.modulate.g8 = rand_range(0, 255)
 	sprite.modulate.r8 = rand_range(0, 255)
