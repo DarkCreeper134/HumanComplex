@@ -29,11 +29,11 @@ radius = 112.004
 [sub_resource type="CircleShape2D" id=5]
 radius = 6.0
 
-[sub_resource type="ShaderMaterial" id=25]
+[sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 11 )
 shader_param/active = false
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=7]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("BalloonTop:material:shader_param/active")
@@ -48,7 +48,7 @@ tracks/0/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=8]
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -64,8 +64,7 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=8]
-resource_name = "Down"
+[sub_resource type="Animation" id=9]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("BalloonTop:frame")
@@ -92,7 +91,7 @@ tracks/1/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=10]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -144,8 +143,7 @@ tracks/3/keys = {
 "values": [ 0, 1, 0, 1, 0, 1 ]
 }
 
-[sub_resource type="Animation" id=10]
-resource_name = "Left"
+[sub_resource type="Animation" id=11]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("BalloonTop:frame")
@@ -184,8 +182,7 @@ tracks/2/keys = {
 "values": [ 90.0 ]
 }
 
-[sub_resource type="Animation" id=11]
-resource_name = "Right"
+[sub_resource type="Animation" id=12]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("BalloonTop:frame")
@@ -224,8 +221,7 @@ tracks/2/keys = {
 "values": [ -90.0 ]
 }
 
-[sub_resource type="Animation" id=12]
-resource_name = "Up"
+[sub_resource type="Animation" id=13]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("BalloonTop:frame")
@@ -252,31 +248,28 @@ tracks/1/keys = {
 "values": [ 180.0 ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=13]
+[sub_resource type="AnimationNodeAnimation" id=14]
 animation = "Down"
 
-[sub_resource type="AnimationNodeAnimation" id=14]
+[sub_resource type="AnimationNodeAnimation" id=15]
 animation = "Up"
 
-[sub_resource type="AnimationNodeAnimation" id=15]
+[sub_resource type="AnimationNodeAnimation" id=16]
 animation = "Left"
 
-[sub_resource type="AnimationNodeAnimation" id=16]
+[sub_resource type="AnimationNodeAnimation" id=17]
 animation = "Right"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=17]
-blend_point_0/node = SubResource( 13 )
+[sub_resource type="AnimationNodeBlendSpace2D" id=18]
+blend_point_0/node = SubResource( 14 )
 blend_point_0/pos = Vector2( 0, 1 )
-blend_point_1/node = SubResource( 14 )
+blend_point_1/node = SubResource( 15 )
 blend_point_1/pos = Vector2( 0, -1 )
-blend_point_2/node = SubResource( 15 )
+blend_point_2/node = SubResource( 16 )
 blend_point_2/pos = Vector2( -1, 0 )
-blend_point_3/node = SubResource( 16 )
+blend_point_3/node = SubResource( 17 )
 blend_point_3/pos = Vector2( 1, 0 )
 blend_mode = 1
-
-[sub_resource type="AnimationNodeAnimation" id=18]
-animation = "Idle"
 
 [sub_resource type="AnimationNodeAnimation" id=19]
 animation = "Idle"
@@ -287,28 +280,31 @@ animation = "Idle"
 [sub_resource type="AnimationNodeAnimation" id=21]
 animation = "Idle"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=22]
-blend_point_0/node = SubResource( 18 )
+[sub_resource type="AnimationNodeAnimation" id=22]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=23]
+blend_point_0/node = SubResource( 19 )
 blend_point_0/pos = Vector2( -1, 0 )
-blend_point_1/node = SubResource( 19 )
+blend_point_1/node = SubResource( 20 )
 blend_point_1/pos = Vector2( 0, -1 )
-blend_point_2/node = SubResource( 20 )
+blend_point_2/node = SubResource( 21 )
 blend_point_2/pos = Vector2( 0, 1 )
-blend_point_3/node = SubResource( 21 )
+blend_point_3/node = SubResource( 22 )
 blend_point_3/pos = Vector2( 1, 0 )
 
-[sub_resource type="AnimationNodeStateMachine" id=23]
-states/BlendSpace2D/node = SubResource( 22 )
+[sub_resource type="AnimationNodeStateMachine" id=24]
+states/BlendSpace2D/node = SubResource( 23 )
 states/BlendSpace2D/position = Vector2( 202, 34 )
 start_node = "BlendSpace2D"
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=24]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=25]
 
 [node name="Balloon" type="YSort"]
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
 script = ExtResource( 10 )
-FRICTION = 1
+FRICTION = 50
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
 position = Vector2( 0, 17 )
@@ -347,48 +343,48 @@ rotation = 1.5708
 shape = SubResource( 5 )
 
 [node name="Stats" parent="KinematicBody2D" instance=ExtResource( 5 )]
-max_health = 10
 
 [node name="WanderController" parent="KinematicBody2D" instance=ExtResource( 2 )]
 
 [node name="BalloonTop" type="Sprite" parent="KinematicBody2D"]
-material = SubResource( 25 )
-position = Vector2( 0, 0.161449 )
+material = SubResource( 6 )
+position = Vector2( 0, -0.644222 )
 texture = ExtResource( 9 )
 hframes = 4
 
 [node name="BalloonStringTop" type="Sprite" parent="KinematicBody2D"]
-position = Vector2( 0, 8.16145 )
+position = Vector2( 0, 7.35578 )
 texture = ExtResource( 7 )
 hframes = 4
 
 [node name="BalloonStringBottom" type="Sprite" parent="KinematicBody2D"]
-position = Vector2( 0, 8.16145 )
+position = Vector2( 0, 7.35578 )
 texture = ExtResource( 8 )
 hframes = 4
+frame = 1
 
 [node name="BlinkAnimationPlayer" type="AnimationPlayer" parent="KinematicBody2D"]
-anims/End = SubResource( 6 )
-anims/Start = SubResource( 7 )
+anims/End = SubResource( 7 )
+anims/Start = SubResource( 8 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="KinematicBody2D"]
-anims/Down = SubResource( 8 )
-anims/Idle = SubResource( 9 )
-anims/Left = SubResource( 10 )
-anims/Right = SubResource( 11 )
-anims/Up = SubResource( 12 )
+anims/Down = SubResource( 9 )
+anims/Idle = SubResource( 10 )
+anims/Left = SubResource( 11 )
+anims/Right = SubResource( 12 )
+anims/Up = SubResource( 13 )
 
 [node name="AnimationTree2" type="AnimationTree" parent="KinematicBody2D"]
-tree_root = SubResource( 17 )
+tree_root = SubResource( 18 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/blend_position = Vector2( -1.59966, 2.01724 )
 
 [node name="AnimationTree" type="AnimationTree" parent="KinematicBody2D"]
-tree_root = SubResource( 23 )
+tree_root = SubResource( 24 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 24 )
+parameters/playback = SubResource( 25 )
 parameters/BlendSpace2D/blend_position = Vector2( 0, 0 )
 
 [connection signal="area_entered" from="KinematicBody2D/HurtBox" to="KinematicBody2D" method="_on_HurtBox_area_entered"]

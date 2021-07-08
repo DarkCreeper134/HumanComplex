@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Textures/Grass.png" type="Texture" id=1]
 [ext_resource path="res://Textures/Dirt.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://World/TranstionTo.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Sprites/Enemys/BalloonEnemy.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Transition.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Textures/ChainFence.png" type="Texture" id=12]
 
 [sub_resource type="TileSet" id=1]
 0/name = "Grass.png 0"
@@ -137,7 +138,32 @@
 0/shapes = [  ]
 0/z_index = 0
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="TileSet" id=6]
+0/name = "ChainFence.png 0"
+0/texture = ExtResource( 12 )
+0/tex_offset = Vector2( 0, -16 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 160, 160 )
+0/tile_mode = 1
+0/autotile/bitmask_mode = 1
+0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 432, Vector2( 0, 1 ), 438, Vector2( 0, 2 ), 54, Vector2( 1, 0 ), 504, Vector2( 1, 1 ), 511, Vector2( 1, 2 ), 63, Vector2( 2, 0 ), 216, Vector2( 2, 1 ), 219, Vector2( 2, 2 ), 27 ]
+0/autotile/icon_coordinate = Vector2( 0, 0 )
+0/autotile/tile_size = Vector2( 16, 32 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
+[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 16, 8 )
 
 [node name="World2" type="Node2D"]
@@ -172,6 +198,11 @@ tile_set = SubResource( 5 )
 cell_size = Vector2( 16, 16 )
 format = 1
 tile_data = PoolIntArray( 1048568, 0, 0, 1048569, 0, 2, 983046, 0, 0, 983047, 0, 2, 1114104, 0, 65536, 1114105, 0, 65538, 1048582, 0, 65536, 1048583, 0, 65538, 1179640, 0, 65536, 1179641, 0, 65538, 1114118, 0, 65536, 1114119, 0, 65538, 1245176, 0, 65536, 1245177, 0, 65538, 1179654, 0, 65536, 1179655, 0, 65538, 1310712, 0, 65536, 1310713, 0, 131077, 1310714, 0, 2, 1245189, 0, 0, 1245190, 0, 131078, 1245191, 0, 65538, 1376248, 0, 65536, 1376249, 0, 65537, 1376250, 0, 65538, 1310725, 0, 65536, 1310726, 0, 65537, 1310727, 0, 65538, 1441784, 0, 65536, 1441785, 0, 65537, 1441786, 0, 131077, 1441787, 0, 2, 1376259, 0, 0, 1376260, 0, 1, 1376261, 0, 131078, 1376262, 0, 65537, 1376263, 0, 65538, 1507320, 0, 65536, 1507321, 0, 65537, 1507322, 0, 65537, 1507323, 0, 131077, 1507324, 0, 2, 1441795, 0, 65536, 1441796, 0, 65537, 1441797, 0, 65537, 1441798, 0, 65537, 1441799, 0, 65538, 1572856, 0, 65536, 1572857, 0, 65537, 1572858, 0, 65537, 1572859, 0, 65537, 1572860, 0, 131077, 1572861, 0, 1, 1572862, 0, 2, 1507329, 0, 0, 1507330, 0, 1, 1507331, 0, 131078, 1507332, 0, 65537, 1507333, 0, 65537, 1507334, 0, 65537, 1507335, 0, 65538, 1638392, 0, 65536, 1638393, 0, 65537, 1638394, 0, 65537, 1638395, 0, 65537, 1638396, 0, 65537, 1638397, 0, 65537, 1638398, 0, 65538, 1572865, 0, 65536, 1572866, 0, 65537, 1572867, 0, 65537, 1572868, 0, 65537, 1572869, 0, 65537, 1572870, 0, 65537, 1572871, 0, 65538, 1703928, 0, 65536, 1703929, 0, 65537, 1703930, 0, 65537, 1703931, 0, 65537, 1703932, 0, 65537, 1703933, 0, 65537, 1703934, 0, 65538, 1638401, 0, 65536, 1638402, 0, 65537, 1638403, 0, 65537, 1638404, 0, 65537, 1638405, 0, 65537, 1638406, 0, 65537, 1638407, 0, 65538, 1769464, 0, 65536, 1769465, 0, 65537, 1769466, 0, 65537, 1769467, 0, 65537, 1769468, 0, 65537, 1769469, 0, 65537, 1769470, 0, 65538, 1703937, 0, 65536, 1703938, 0, 65537, 1703939, 0, 65537, 1703940, 0, 65537, 1703941, 0, 65537, 1703942, 0, 65537, 1703943, 0, 65538, 1835000, 0, 65536, 1835001, 0, 65537, 1835002, 0, 65537, 1835003, 0, 65537, 1835004, 0, 65537, 1835005, 0, 65537, 1835006, 0, 65538, 1769473, 0, 65536, 1769474, 0, 65537, 1769475, 0, 65537, 1769476, 0, 65537, 1769477, 0, 65537, 1769478, 0, 65537, 1769479, 0, 65538, 1900536, 0, 65536, 1900537, 0, 65537, 1900538, 0, 65537, 1900539, 0, 65537, 1900540, 0, 65537, 1900541, 0, 65537, 1900542, 0, 65538, 1835009, 0, 65536, 1835010, 0, 65537, 1835011, 0, 65537, 1835012, 0, 65537, 1835013, 0, 65537, 1835014, 0, 65537, 1835015, 0, 65538, 1966072, 0, 131072, 1966073, 0, 131073, 1966074, 0, 131073, 1966075, 0, 131073, 1966076, 0, 131073, 1966077, 0, 131073, 1966078, 0, 131074, 1900545, 0, 131072, 1900546, 0, 131073, 1900547, 0, 131073, 1900548, 0, 131073, 1900549, 0, 131073, 1900550, 0, 131073, 1900551, 0, 131074 )
+
+[node name="ChainFence" type="TileMap" parent="."]
+tile_set = SubResource( 6 )
+cell_size = Vector2( 16, 16 )
+format = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 modulate = Color( 0, 0, 0, 1 )
@@ -212,7 +243,7 @@ Link = "A1"
 IsDoor = false
 
 [node name="CollisionShape2D" parent="TranstionTo/ToLevel1/Area2D" index="0"]
-shape = SubResource( 6 )
+shape = SubResource( 7 )
 
 [node name="TransitionFrom" type="Node2D" parent="."]
 
