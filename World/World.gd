@@ -5,6 +5,7 @@ onready var PlayPos = Player.position
 onready var TransitionFrom = $TransitionFrom
 onready var timer = $Timer
 onready var Keys = $"/root/Keys"
+onready var Transition = $Transition/TrasnsitionCover
 signal playerDeath
 signal nextLevel
 signal stopTransition
@@ -35,6 +36,7 @@ func _on_Button_pressed():
 	pass
 
 func _on_Transition_TrasitionActivated(Key, Link, IsDoor):
+	startTransition()
 	if IsDoor:
 		pass
 	else:
@@ -67,5 +69,12 @@ func _on_Timer_timeout():
 		Player.input_vector = direction
 		Player.velocity = Vector2.ZERO
 		Player.DoorEntered()
+		stopTransition()
 		emit_signal("stopTransition")
 		Keys.playerCanMove = true
+
+func startTransition():
+	Transition.show()
+
+func stopTransition():
+	Transition.hide()

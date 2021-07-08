@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Textures/Grass.png" type="Texture" id=1]
 [ext_resource path="res://Textures/Dirt.png" type="Texture" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://Textures/GravelPath.png" type="Texture" id=7]
 [ext_resource path="res://Textures/GravelWorn.png" type="Texture" id=8]
 [ext_resource path="res://World/TranstionTo.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Sprites/Enemys/BalloonEnemy.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Transition.tscn" type="PackedScene" id=11]
 
 [sub_resource type="TileSet" id=1]
 0/name = "Grass.png 0"
@@ -173,17 +175,34 @@ tile_data = PoolIntArray( 1048568, 0, 0, 1048569, 0, 2, 983046, 0, 0, 983047, 0,
 
 [node name="Camera2D" type="Camera2D" parent="."]
 modulate = Color( 0, 0, 0, 1 )
-position = Vector2( 0, 16 )
+position = Vector2( 0, 336 )
 current = true
 smoothing_enabled = true
 
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Player" parent="YSort" instance=ExtResource( 4 )]
-position = Vector2( 0, 16 )
+position = Vector2( 0, 336 )
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/Player"]
 remote_path = NodePath("../../../Camera2D")
+
+[node name="Enemys" type="YSort" parent="YSort"]
+
+[node name="Balloon" parent="YSort/Enemys" instance=ExtResource( 10 )]
+position = Vector2( 64, -16 )
+
+[node name="Balloon2" parent="YSort/Enemys" instance=ExtResource( 10 )]
+position = Vector2( 88, 56 )
+
+[node name="Balloon3" parent="YSort/Enemys" instance=ExtResource( 10 )]
+position = Vector2( -64, 56 )
+
+[node name="Balloon4" parent="YSort/Enemys" instance=ExtResource( 10 )]
+position = Vector2( 40, -32 )
+
+[node name="Balloon5" parent="YSort/Enemys" instance=ExtResource( 10 )]
+position = Vector2( -32, -24 )
 
 [node name="TranstionTo" type="Node2D" parent="."]
 
@@ -203,19 +222,7 @@ position = Vector2( 0, 352 )
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
-[node name="Popup" type="Popup" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect" type="ColorRect" parent="Popup"]
-margin_right = 40.0
-margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Transition" parent="." instance=ExtResource( 11 )]
 
 [connection signal="playerDeath" from="YSort/Player" to="." method="_on_Player_playerDeath"]
 [connection signal="TrasitionActivated" from="TranstionTo/ToLevel1" to="." method="_on_Transition_TrasitionActivated"]

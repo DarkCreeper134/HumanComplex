@@ -1,0 +1,13 @@
+[gd_scene format=2]
+
+[node name="Transition" type="CanvasLayer"]
+
+[node name="TrasnsitionCover" type="ColorRect" parent="."]
+margin_left = -8.0
+margin_top = -8.0
+margin_right = 328.0
+margin_bottom = 184.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

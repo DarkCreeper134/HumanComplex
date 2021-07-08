@@ -1,4 +1,4 @@
-[gd_scene load_steps=152 format=2]
+[gd_scene load_steps=153 format=2]
 
 [ext_resource path="res://Textures/Grass.png" type="Texture" id=1]
 [ext_resource path="res://Textures/Dirt.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Sprites/Player/Player.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Effects/Transition.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Sprites/ToriGate.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Transition.tscn" type="PackedScene" id=10]
 [ext_resource path="res://World/World.gd" type="Script" id=11]
 [ext_resource path="res://World/TranstionTo.tscn" type="PackedScene" id=12]
 
@@ -1446,6 +1447,8 @@ position = Vector2( -48, 432 )
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
+
+[node name="Transition" parent="." instance=ExtResource( 10 )]
 
 [connection signal="playerDeath" from="YSort/Player" to="." method="_on_Player_playerDeath"]
 [connection signal="TrasitionActivated" from="TransitionTo/ToLevel2" to="." method="_on_Transition_TrasitionActivated"]
