@@ -40,7 +40,7 @@ func _physics_process(delta):
 		#SLEEP:
 			#Sleep_State()
 		ACTION:
-			Action_State()
+			Action_State(delta)
 
 func Move_State(delta):
 	attackShape.disabled = true
@@ -80,11 +80,11 @@ func move():
 		#state = MOVE
 		#emit_signal("BedLeave")
 
-func Action_State():
+func Action_State(delta):
 	animationState.travel("Attack")
 	attackShape.disabled = false
 	move()
-	velocity = Vector2.ZERO
+	velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 
 
 func Attack_Finished():
@@ -98,7 +98,7 @@ func DoorEntered():
 
 func _on_HurtBox_area_entered(area):
 	stats.health -= area.damage
-	hurtbox.start_invincibility(0.5)
+	hurtbox.start_invincibility(1)
 
 func _on_HurtBox_invicniblity_started():
 	blinkAnimationPlayer.play("Start")

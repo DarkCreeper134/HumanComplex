@@ -3,7 +3,6 @@
 [node name="Transition" type="CanvasLayer"]
 
 [node name="TrasnsitionCover" type="ColorRect" parent="."]
-visible = false
 margin_left = -8.0
 margin_top = -8.0
 margin_right = 328.0
