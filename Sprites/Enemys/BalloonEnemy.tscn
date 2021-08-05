@@ -348,17 +348,17 @@ shape = SubResource( 5 )
 
 [node name="BalloonTop" type="Sprite" parent="KinematicBody2D"]
 material = SubResource( 6 )
-position = Vector2( 0, -0.644222 )
+position = Vector2( 0, -2.82634 )
 texture = ExtResource( 9 )
 hframes = 4
 
 [node name="BalloonStringTop" type="Sprite" parent="KinematicBody2D"]
-position = Vector2( 0, 7.35578 )
+position = Vector2( 0, 5.17366 )
 texture = ExtResource( 7 )
 hframes = 4
 
 [node name="BalloonStringBottom" type="Sprite" parent="KinematicBody2D"]
-position = Vector2( 0, 7.35578 )
+position = Vector2( 0, 5.17366 )
 texture = ExtResource( 8 )
 hframes = 4
 frame = 1

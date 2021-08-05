@@ -23,12 +23,15 @@ onready var wanderController = $WanderController
 onready var animationPlayer = $AnimationPlayer
 onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 onready var sprite = $BalloonTop
-onready var animationTree2 = $AnimationTree2
+onready var animationTree = $AnimationTree
+var spriteSkin = 1
+var spriteAnimaimationBlendPos : String = spriteSkin + "/parameters/blend_position"
 
 func _ready():
 	sprite.modulate.b8 = rand_range(0, 255)
 	sprite.modulate.g8 = rand_range(0, 255)
 	sprite.modulate.r8 = rand_range(0, 255)
+	animationPlayer.travel(spriteSkin)
 
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta)
@@ -47,14 +50,14 @@ func _physics_process(delta):
 				wanderController.timer = 0
 			
 			var direction = global_position.direction_to(wanderController.target_position)
-			animationTree2.set("parameters/blend_position", direction)
+			animationTree.set(spriteAnimaimationBlendPos, direction)
 			velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
 		
 		CHASE:
 			var player = playerDetectionZone.player
 			if player != null:
 				var direction = global_position.direction_to(player.global_position)
-				animationTree2.set("parameters/blend_position", direction)
+				animationTree.set("parameters/blend_position", direction)
 				velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
 			else:
 				state = IDLE
@@ -76,6 +79,9 @@ func check_state():
 		state = pick_random_state([IDLE, WANDER])
 		wanderController.start_wander_timer(rand_range(1,3))
 
+func SetBlendPosition():
+	blinkAnimationPlayer = spriteSkin + "/parameters/blend_position"
+
 func pick_random_state(state_list):
 	state_list.shuffle()
 	return state_list.pop_front()
@@ -89,6 +95,8 @@ func _on_HurtBox_area_entered(area):
 	knockback = area.knockback * 120
 	hurtbox.start_invincibility(0.5)
 	hurtbox.create_hit_effect()
+	spriteSkin += 1
+	animationPlayer.travel(spriteSkin)
 
 func _on_HurtBox_invicniblity_ended():
 	blinkAnimationPlayer.play("End")
