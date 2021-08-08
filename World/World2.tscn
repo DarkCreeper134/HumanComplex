@@ -1212,7 +1212,7 @@ position = Vector2( 296, -96 )
 position = Vector2( -176, -104 )
 
 [node name="BalloonBoss" parent="YSort/Enemys" instance=ExtResource( 17 )]
-position = Vector2( -1, -172 )
+position = Vector2( 0, -318 )
 
 [node name="Fountain" parent="YSort" instance=ExtResource( 13 )]
 

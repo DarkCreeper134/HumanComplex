@@ -25,7 +25,7 @@ onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 onready var sprite = $Sprite
 onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
-var spriteSkin = 1
+var spriteSkin : int = 1
 var spriteAnimaimationBlendPos : String = "parameters/" + String(spriteSkin) + "/blend_position"
 
 func _ready():
@@ -96,6 +96,31 @@ func _on_HurtBox_area_entered(area):
 	spriteSkin += 1
 	SetBlendPosition()
 	animationState.travel(String(spriteSkin))
+	match spriteSkin:
+		1:
+			ACCELERATION = 300
+			MAX_SPEED = 50
+			FRICTION = 200
+		2:
+			ACCELERATION = 290
+			MAX_SPEED = 40
+			FRICTION = 250
+		3:
+			ACCELERATION = 280
+			MAX_SPEED = 30
+			FRICTION = 300
+		4:
+			ACCELERATION = 260
+			MAX_SPEED = 20
+			FRICTION = 400
+		5:
+			ACCELERATION = 250
+			MAX_SPEED = 70
+			FRICTION = 100
+		6:
+			ACCELERATION = 240
+			MAX_SPEED = 75
+			FRICTION = 50
 
 func _on_HurtBox_invicniblity_ended():
 	blinkAnimationPlayer.play("End")

@@ -329,7 +329,6 @@ position = Vector2( 0, 17 )
 shape = SubResource( 3 )
 
 [node name="PlayerDetectionZone" parent="KinematicBody2D" instance=ExtResource( 6 )]
-visible = false
 
 [node name="CollisionShape2D" parent="KinematicBody2D/PlayerDetectionZone" index="0"]
 position = Vector2( 0, 17 )
@@ -348,20 +347,19 @@ shape = SubResource( 5 )
 
 [node name="BalloonTop" type="Sprite" parent="KinematicBody2D"]
 material = SubResource( 6 )
-position = Vector2( 0, -2.86237 )
+position = Vector2( 0, -1.49712 )
 texture = ExtResource( 9 )
 hframes = 4
 
 [node name="BalloonStringTop" type="Sprite" parent="KinematicBody2D"]
-position = Vector2( 0, 5.13763 )
+position = Vector2( 0, 6.50288 )
 texture = ExtResource( 7 )
 hframes = 4
 
 [node name="BalloonStringBottom" type="Sprite" parent="KinematicBody2D"]
-position = Vector2( 0, 5.13763 )
+position = Vector2( 0, 6.50288 )
 texture = ExtResource( 8 )
 hframes = 4
-frame = 1
 
 [node name="BlinkAnimationPlayer" type="AnimationPlayer" parent="KinematicBody2D"]
 anims/End = SubResource( 7 )
