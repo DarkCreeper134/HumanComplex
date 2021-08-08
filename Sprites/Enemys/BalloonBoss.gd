@@ -22,16 +22,14 @@ onready var softCollision = $SoftCollision
 onready var wanderController = $WanderController
 onready var animationPlayer = $AnimationPlayer
 onready var blinkAnimationPlayer = $BlinkAnimationPlayer
-onready var sprite = $BalloonTop
+onready var sprite = $Sprite
 onready var animationTree = $AnimationTree
+onready var animationState = animationTree.get("parameters/playback")
 var spriteSkin = 1
-var spriteAnimaimationBlendPos : String = spriteSkin + "/parameters/blend_position"
+var spriteAnimaimationBlendPos : String = "parameters/" + String(spriteSkin) + "/blend_position"
 
 func _ready():
-	sprite.modulate.b8 = rand_range(0, 255)
-	sprite.modulate.g8 = rand_range(0, 255)
-	sprite.modulate.r8 = rand_range(0, 255)
-	animationPlayer.travel(spriteSkin)
+	animationState.travel(String(spriteSkin))
 
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta)
@@ -57,7 +55,7 @@ func _physics_process(delta):
 			var player = playerDetectionZone.player
 			if player != null:
 				var direction = global_position.direction_to(player.global_position)
-				animationTree.set("parameters/blend_position", direction)
+				animationTree.set(spriteAnimaimationBlendPos, direction)
 				velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
 			else:
 				state = IDLE
@@ -80,7 +78,7 @@ func check_state():
 		wanderController.start_wander_timer(rand_range(1,3))
 
 func SetBlendPosition():
-	blinkAnimationPlayer = spriteSkin + "/parameters/blend_position"
+	spriteAnimaimationBlendPos = "parameters/" + String(spriteSkin) + "/blend_position"
 
 func pick_random_state(state_list):
 	state_list.shuffle()
@@ -93,10 +91,11 @@ func _on_Stats_no_health():
 func _on_HurtBox_area_entered(area):
 	stats.health -= area.damage
 	knockback = area.knockback * 120
-	hurtbox.start_invincibility(0.5)
+	hurtbox.start_invincibility(1)
 	hurtbox.create_hit_effect()
 	spriteSkin += 1
-	animationPlayer.travel(spriteSkin)
+	SetBlendPosition()
+	animationState.travel(String(spriteSkin))
 
 func _on_HurtBox_invicniblity_ended():
 	blinkAnimationPlayer.play("End")

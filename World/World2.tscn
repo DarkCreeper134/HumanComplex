@@ -1,4 +1,4 @@
-[gd_scene load_steps=122 format=2]
+[gd_scene load_steps=123 format=2]
 
 [ext_resource path="res://Textures/Grass.png" type="Texture" id=1]
 [ext_resource path="res://Textures/Dirt.png" type="Texture" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://Textures/StairsDown.png" type="Texture" id=14]
 [ext_resource path="res://Textures/WoodenAddons.png" type="Texture" id=15]
 [ext_resource path="res://Textures/woodfloor.png" type="Texture" id=16]
+[ext_resource path="res://Sprites/Enemys/BalloonBoss.tscn" type="PackedScene" id=17]
 
 [sub_resource type="TileSet" id=1]
 0/name = "Grass.png 0"
@@ -1209,6 +1210,9 @@ position = Vector2( 296, -96 )
 
 [node name="Balloon5" parent="YSort/Enemys" instance=ExtResource( 10 )]
 position = Vector2( -176, -104 )
+
+[node name="BalloonBoss" parent="YSort/Enemys" instance=ExtResource( 17 )]
+position = Vector2( -1, -172 )
 
 [node name="Fountain" parent="YSort" instance=ExtResource( 13 )]
 
