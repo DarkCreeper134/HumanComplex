@@ -21,12 +21,13 @@ _global_script_class_icons={
 [application]
 
 config/name="HumanComplex"
-run/main_scene="res://World.tscn"
+run/main_scene="res://World/Hub.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 PlayerStats="*res://Sprites/Player/PlayerStats.tscn"
+Keys="*res://World/Keys.gd"
 
 [display]
 

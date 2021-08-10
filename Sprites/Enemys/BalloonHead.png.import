@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/EmptyHealthBar.png-71cd919c504f1753ee0e651d449f66f9.stex"
+path="res://.import/BalloonHead.png-619d1395cb58bda48b7cccb9d81da0df.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/EmptyHealthBar.png"
-dest_files=[ "res://.import/EmptyHealthBar.png-71cd919c504f1753ee0e651d449f66f9.stex" ]
+source_file="res://Sprites/Enemys/BalloonHead.png"
+dest_files=[ "res://.import/BalloonHead.png-619d1395cb58bda48b7cccb9d81da0df.stex" ]
 
 [params]
 

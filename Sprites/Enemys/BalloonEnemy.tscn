@@ -1,0 +1,396 @@
+[gd_scene load_steps=37 format=2]
+
+[ext_resource path="res://Hitboxes-Hurtboxes/Hitbox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Hitboxes-Hurtboxes/WanderController.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Hitboxes-Hurtboxes/HurtBox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Hitboxes-Hurtboxes/SoftCollision.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Hitboxes-Hurtboxes/Stats.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Hitboxes-Hurtboxes/PlayerDetectionZone.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Sprites/Enemys/BalloonStringTop.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Enemys/BalloonStringBottom.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Enemys/BalloonHead.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Enemys/BalloonEnemy.gd" type="Script" id=10]
+[ext_resource path="res://WhiteColorShader.shader" type="Shader" id=11]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 5.0
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 4.0
+height = 6.0
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 7.0
+height = 0.0
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 112.004
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 6.0
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = ExtResource( 11 )
+shader_param/active = false
+
+[sub_resource type="Animation" id=7]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("BalloonTop:material:shader_param/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("BalloonTop:material:shader_param/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=9]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("BalloonTop:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Position2D:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=10]
+length = 1.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("BalloonTop:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -2 ), Vector2( 0, -3 ), Vector2( 0, -2 ), Vector2( 0, 0 ), Vector2( 0, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BalloonStringTop:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 8 ), Vector2( 0, 6 ), Vector2( 0, 5 ), Vector2( 0, 6 ), Vector2( 0, 8 ), Vector2( 0, 9 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BalloonStringBottom:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 8 ), Vector2( 0, 6 ), Vector2( 0, 5 ), Vector2( 0, 6 ), Vector2( 0, 8 ), Vector2( 0, 9 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("BalloonStringBottom:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 0, 1, 0, 1 ]
+}
+
+[sub_resource type="Animation" id=11]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("BalloonTop:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BalloonStringBottom:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Position2D:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 90.0 ]
+}
+
+[sub_resource type="Animation" id=12]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("BalloonTop:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BalloonStringBottom:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Position2D:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -90.0 ]
+}
+
+[sub_resource type="Animation" id=13]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("BalloonTop:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Position2D:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 180.0 ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=14]
+animation = "Down"
+
+[sub_resource type="AnimationNodeAnimation" id=15]
+animation = "Up"
+
+[sub_resource type="AnimationNodeAnimation" id=16]
+animation = "Left"
+
+[sub_resource type="AnimationNodeAnimation" id=17]
+animation = "Right"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=18]
+blend_point_0/node = SubResource( 14 )
+blend_point_0/pos = Vector2( 0, 1 )
+blend_point_1/node = SubResource( 15 )
+blend_point_1/pos = Vector2( 0, -1 )
+blend_point_2/node = SubResource( 16 )
+blend_point_2/pos = Vector2( -1, 0 )
+blend_point_3/node = SubResource( 17 )
+blend_point_3/pos = Vector2( 1, 0 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id=19]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeAnimation" id=20]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeAnimation" id=21]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeAnimation" id=22]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=23]
+blend_point_0/node = SubResource( 19 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 20 )
+blend_point_1/pos = Vector2( 0, -1 )
+blend_point_2/node = SubResource( 21 )
+blend_point_2/pos = Vector2( 0, 1 )
+blend_point_3/node = SubResource( 22 )
+blend_point_3/pos = Vector2( 1, 0 )
+
+[sub_resource type="AnimationNodeStateMachine" id=24]
+states/BlendSpace2D/node = SubResource( 23 )
+states/BlendSpace2D/position = Vector2( 202, 34 )
+start_node = "BlendSpace2D"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=25]
+
+[node name="Balloon" type="YSort"]
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+script = ExtResource( 10 )
+FRICTION = 50
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+position = Vector2( 0, 17 )
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="Position2D" type="Position2D" parent="KinematicBody2D"]
+position = Vector2( 0, 17 )
+
+[node name="Hitbox" parent="KinematicBody2D/Position2D" instance=ExtResource( 1 )]
+position = Vector2( 0, 4 )
+rotation = 1.5708
+damage = 3
+
+[node name="CollisionShape2D" parent="KinematicBody2D/Position2D/Hitbox" index="0"]
+shape = SubResource( 2 )
+
+[node name="HurtBox" parent="KinematicBody2D" instance=ExtResource( 3 )]
+
+[node name="CollisionShape2D" parent="KinematicBody2D/HurtBox" index="0"]
+position = Vector2( 0, 17 )
+shape = SubResource( 3 )
+
+[node name="PlayerDetectionZone" parent="KinematicBody2D" instance=ExtResource( 6 )]
+
+[node name="CollisionShape2D" parent="KinematicBody2D/PlayerDetectionZone" index="0"]
+position = Vector2( 0, 17 )
+shape = SubResource( 4 )
+
+[node name="SoftCollision" parent="KinematicBody2D" instance=ExtResource( 4 )]
+
+[node name="CollisionShape2D" parent="KinematicBody2D/SoftCollision" index="0"]
+position = Vector2( 0, 17 )
+rotation = 1.5708
+shape = SubResource( 5 )
+
+[node name="Stats" parent="KinematicBody2D" instance=ExtResource( 5 )]
+
+[node name="WanderController" parent="KinematicBody2D" instance=ExtResource( 2 )]
+
+[node name="BalloonTop" type="Sprite" parent="KinematicBody2D"]
+material = SubResource( 6 )
+position = Vector2( 0, -1.49712 )
+texture = ExtResource( 9 )
+hframes = 4
+
+[node name="BalloonStringTop" type="Sprite" parent="KinematicBody2D"]
+position = Vector2( 0, 6.50288 )
+texture = ExtResource( 7 )
+hframes = 4
+
+[node name="BalloonStringBottom" type="Sprite" parent="KinematicBody2D"]
+position = Vector2( 0, 6.50288 )
+texture = ExtResource( 8 )
+hframes = 4
+
+[node name="BlinkAnimationPlayer" type="AnimationPlayer" parent="KinematicBody2D"]
+anims/End = SubResource( 7 )
+anims/Start = SubResource( 8 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="KinematicBody2D"]
+anims/Down = SubResource( 9 )
+anims/Idle = SubResource( 10 )
+anims/Left = SubResource( 11 )
+anims/Right = SubResource( 12 )
+anims/Up = SubResource( 13 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="KinematicBody2D"]
+tree_root = SubResource( 18 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/blend_position = Vector2( -1.59966, 2.01724 )
+
+[node name="AnimationTree" type="AnimationTree" parent="KinematicBody2D"]
+tree_root = SubResource( 24 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 25 )
+parameters/BlendSpace2D/blend_position = Vector2( 0, 0 )
+
+[connection signal="area_entered" from="KinematicBody2D/HurtBox" to="KinematicBody2D" method="_on_HurtBox_area_entered"]
+[connection signal="invicniblity_ended" from="KinematicBody2D/HurtBox" to="KinematicBody2D" method="_on_HurtBox_invicniblity_ended"]
+[connection signal="invicniblity_started" from="KinematicBody2D/HurtBox" to="KinematicBody2D" method="_on_HurtBox_invicniblity_started"]
+[connection signal="no_health" from="KinematicBody2D/Stats" to="KinematicBody2D" method="_on_Stats_no_health"]
+
+[editable path="KinematicBody2D/Position2D/Hitbox"]
+[editable path="KinematicBody2D/HurtBox"]
+[editable path="KinematicBody2D/PlayerDetectionZone"]
+[editable path="KinematicBody2D/SoftCollision"]
