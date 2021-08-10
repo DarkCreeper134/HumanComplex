@@ -691,7 +691,7 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 
-[node name="KinematicBody2D" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 2 )
 

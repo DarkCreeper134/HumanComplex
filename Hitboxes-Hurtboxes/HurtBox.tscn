@@ -10,6 +10,7 @@ script = ExtResource( 1 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
 [node name="Timer" type="Timer" parent="."]
+autostart = true
 
 [connection signal="invicniblity_ended" from="." to="." method="_on_HurtBox_invicniblity_ended"]
 [connection signal="invicniblity_started" from="." to="." method="_on_HurtBox_invicniblity_started"]

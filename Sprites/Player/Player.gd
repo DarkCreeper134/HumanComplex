@@ -6,6 +6,8 @@ export var MAX_SPEED = 80
 export var FRICTION = 500
 var input_vector = Vector2.ZERO
 
+signal playerDeath
+
 enum {
 	MOVE,
 	#SLEEP,
@@ -25,9 +27,10 @@ onready var attackShape = $YSort/HitboxPivot/Attack/CollisionShape2D
 onready var hurtbox = $HurtBox
 onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 onready var swordHitbox = $YSort/HitboxPivot/Attack
+onready var Keys = $"/root/Keys"
 
 func _ready():
-	stats.connect("no_health", self, "queue_free")
+	stats.connect("no_health", self, "no_health")
 	animationTree.active = true
 
 func _physics_process(delta):
@@ -37,7 +40,7 @@ func _physics_process(delta):
 		#SLEEP:
 			#Sleep_State()
 		ACTION:
-			Action_State()
+			Action_State(delta)
 
 func Move_State(delta):
 	attackShape.disabled = true
@@ -64,7 +67,8 @@ func Move_State(delta):
 
 
 func move():
-	velocity = move_and_slide(velocity)
+	if Keys.playerCanMove:
+		velocity = move_and_slide(velocity)
 
 #func BedActivated():
 	#state = SLEEP
@@ -76,11 +80,11 @@ func move():
 		#state = MOVE
 		#emit_signal("BedLeave")
 
-func Action_State():
+func Action_State(delta):
 	animationState.travel("Attack")
 	attackShape.disabled = false
 	move()
-	velocity = Vector2.ZERO
+	velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 
 
 func Attack_Finished():
@@ -88,16 +92,21 @@ func Attack_Finished():
 	attackShape.disabled = true
 	state = MOVE
 
-#func DoorEntered():
-	#animationTree.set("parameters/Idle/blend_position", input_vector)
-	#animationTree.set("parameters/Run/blend_position", input_vector)
+func DoorEntered():
+	animationTree.set("parameters/Idle/blend_position", input_vector)
+	animationTree.set("parameters/Run/blend_position", input_vector)
 
 func _on_HurtBox_area_entered(area):
-	stats.health -= 1
-	hurtbox.start_invincibility(0.5)
+	stats.health -= area.damage
+	hurtbox.start_invincibility(1)
 
 func _on_HurtBox_invicniblity_started():
 	blinkAnimationPlayer.play("Start")
 
 func _on_HurtBox_invicniblity_ended():
 	blinkAnimationPlayer.play("End")
+
+func no_health():
+	emit_signal("playerDeath")
+	blinkAnimationPlayer.play("End")
+	queue_free()

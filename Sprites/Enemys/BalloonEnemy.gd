@@ -10,18 +10,8 @@ enum {
 	CHASE
 }
 
-var colors = [
-	{r = 255,b = 0, g = 0, a = 255},
-	{r = 255,b = 255, g = 0, a = 255},
-	{r = 255,b = 0, g = 255, a = 255},
-	{r = 0,b = 255, g = 0, a = 255},
-	{r = 0,b = 255, g = 255, a = 255},
-	{r = 0,b = 0, g = 255, a = 255}
-]
-
 var velocity = Vector2.ZERO
 var knockback = Vector2.ZERO
-var setVelocity = Vector2.ZERO
 
 var state = CHASE
 
@@ -32,16 +22,13 @@ onready var softCollision = $SoftCollision
 onready var wanderController = $WanderController
 onready var animationPlayer = $AnimationPlayer
 onready var blinkAnimationPlayer = $BlinkAnimationPlayer
-onready var sprite = $Sprite
-
-var canMove = false
+onready var sprite = $BalloonTop
+onready var animationTree2 = $AnimationTree2
 
 func _ready():
-	var color = colors[rand_range(0, colors.size())]
-	sprite.modulate.a8 = color.a
-	sprite.modulate.b8 = color.b
-	sprite.modulate.g8 = color.g
-	sprite.modulate.r8 = color.r
+	sprite.modulate.b8 = rand_range(0, 255)
+	sprite.modulate.g8 = rand_range(0, 255)
+	sprite.modulate.r8 = rand_range(0, 255)
 
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta)
@@ -60,12 +47,14 @@ func _physics_process(delta):
 				wanderController.timer = 0
 			
 			var direction = global_position.direction_to(wanderController.target_position)
+			animationTree2.set("parameters/blend_position", direction)
 			velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
 		
 		CHASE:
 			var player = playerDetectionZone.player
 			if player != null:
 				var direction = global_position.direction_to(player.global_position)
+				animationTree2.set("parameters/blend_position", direction)
 				velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
 			else:
 				state = IDLE
@@ -76,8 +65,7 @@ func _physics_process(delta):
 	move()
 
 func move():
-	if canMove != false:
-		move_and_slide(setVelocity)
+	move_and_slide(velocity)
 
 func seek_player():
 	if playerDetectionZone.can_see_player():
@@ -102,19 +90,8 @@ func _on_HurtBox_area_entered(area):
 	hurtbox.start_invincibility(0.5)
 	hurtbox.create_hit_effect()
 
-func MoveUpdate():
-	if canMove:
-		canMove = false
-	else:
-		canMove = true
-
-func SetVelocity():
-	setVelocity = velocity
-
-
 func _on_HurtBox_invicniblity_ended():
 	blinkAnimationPlayer.play("End")
-
 
 func _on_HurtBox_invicniblity_started():
 	blinkAnimationPlayer.play("Start")
